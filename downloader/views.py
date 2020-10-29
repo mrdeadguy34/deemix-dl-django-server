@@ -34,6 +34,7 @@ def index(request):
 
 		response = HttpResponse(content_type='application/zip')
 
+		os.system("echo $arl > .config/deemix/.arl")
 		cmd = f"deemix -p {tmpFolder} {' '.join(songs)}"
 		print(cmd)
 		os.system(cmd)
