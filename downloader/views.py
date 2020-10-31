@@ -28,7 +28,13 @@ def index(request):
 	if request.method == "POST":
 		songs = json.loads(request.body.decode("utf-8"))["songs"]
 		hashedIP = sha256(getClientIp(request).encode("utf-8")).hexdigest()
-		tmpFolder = os.path.join(settings.TMP_DIR, hashedIP)
+
+		appendedNum = 0
+
+		while os.path.exists(os.path.join(settings.TMP_DIR, hashedIP + f"-{appendedNum}")):
+			appendedNum += 1
+
+		tmpFolder = os.path.join(settings.TMP_DIR, hashedIP + f"-{appendedNum}")
 
 		
 
